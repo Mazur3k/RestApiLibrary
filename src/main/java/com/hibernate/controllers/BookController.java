@@ -28,6 +28,7 @@ public class BookController {
         Set<Book> books = author.getBooks();
         books.add(book);
         author.setBooks(books);
+        authorService.updateAuthor(author);
     }
 
 

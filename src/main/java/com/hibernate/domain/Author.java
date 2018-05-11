@@ -20,6 +20,7 @@ public class Author {
     int id;
     private String firstname;
     private String lastname;
-    @OneToMany
+
+    @OneToMany(cascade=CascadeType.ALL)
     private Set<Book> books = new HashSet<>();
 }
