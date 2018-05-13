@@ -27,11 +27,11 @@ public class BookController {
 
         Author author = authorService.getAuthor(authorId);
         book.setAuthor(author);
-        Set<Book> books = new HashSet<>(author.getBooks());
-        books.add(book);
-        author.setBooks(books);
-        authorService.updateAuthor(author);
         bookService.addBook(book);
+//        Set<Book> books = new HashSet<>(author.getBooks());
+//        books.add(book);
+//        author.setBooks(books);
+//        authorService.updateAuthor(author);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/books")
