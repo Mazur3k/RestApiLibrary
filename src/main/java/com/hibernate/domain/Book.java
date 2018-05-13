@@ -1,5 +1,6 @@
 package com.hibernate.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,8 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.AUTO)
     int id;
     private String title;
-    @ManyToOne(cascade=CascadeType.ALL)
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     Author author;
 }

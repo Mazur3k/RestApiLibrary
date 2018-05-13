@@ -7,6 +7,7 @@ import com.hibernate.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @RestController
@@ -25,10 +26,17 @@ public class BookController {
     public void bindBookToAuthor(@RequestBody Book book, @PathVariable int authorId){
 
         Author author = authorService.getAuthor(authorId);
-        Set<Book> books = author.getBooks();
+        book.setAuthor(author);
+        Set<Book> books = new HashSet<>(author.getBooks());
         books.add(book);
         author.setBooks(books);
         authorService.updateAuthor(author);
+        bookService.addBook(book);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/books")
+    public Set<Book> getAllBooks(){
+        return bookService.getAllBooks();
     }
 
 
