@@ -21,22 +21,24 @@ public class BookController {
     public Set<Book> getAllBooksByAuthorId(@PathVariable int authorId){
         return bookService.getByAuthorId(authorId);
     }
-
     @RequestMapping(method = RequestMethod.POST, value = "/authors/{authorId}/books")
     public void bindBookToAuthor(@RequestBody Book book, @PathVariable int authorId){
-
         Author author = authorService.getAuthor(authorId);
         book.setAuthor(author);
         bookService.addBook(book);
-//        Set<Book> books = new HashSet<>(author.getBooks());
-//        books.add(book);
-//        author.setBooks(books);
-//        authorService.updateAuthor(author);
     }
-
     @RequestMapping(method = RequestMethod.GET, value = "/books")
     public Set<Book> getAllBooks(){
         return bookService.getAllBooks();
+    }
+    @RequestMapping(method = RequestMethod.PUT, value = "/authors/{authorId}/books")
+    public void updateBookData(@RequestBody Book book, @PathVariable int authorId){
+        book.setAuthor(authorService.getAuthor(authorId));
+        bookService.updateBook(book);
+    }
+    @RequestMapping(method = RequestMethod.DELETE, value = "/authors/{authorId}/books/{bookId}")
+    public void deleteBookById(@PathVariable int bookId){
+        bookService.deleteBook(bookId);
     }
 
 

@@ -23,8 +23,8 @@ public class PersonalDataController {
     @RequestMapping(method = RequestMethod.POST, value = "/author/{authorId}/data")
     public void addPersonalData(@RequestBody PersonalData personalData, @PathVariable int authorId){
         Author author = authorService.getAuthor(authorId);
+        //set on personalData because its owner of relationship
         personalData.setAuthor(author);
-        authorService.updateAuthor(author);
         personalDataService.addPersonalData(personalData);
     }
     @RequestMapping(method = RequestMethod.GET, value = "/author/{authorId}/data")
@@ -36,8 +36,9 @@ public class PersonalDataController {
     public void deletePersonalData(@PathVariable int authorId){
         personalDataService.deletePersonalData(authorService.getAuthor(authorId).getPersonalData().getId());
     }
-    @RequestMapping(method = RequestMethod.PUT, value = "/data")
-    public void updatePersonalData(@RequestBody PersonalData personalData){
+    @RequestMapping(method = RequestMethod.PUT, value = "/author/{authorId}/data")
+    public void updatePersonalData(@RequestBody PersonalData personalData, @PathVariable int authorId){
+        personalData.setAuthor(authorService.getAuthor(authorId));
         personalDataService.updatePersonalData(personalData);
     }
 }
