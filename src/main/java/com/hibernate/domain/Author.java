@@ -23,4 +23,7 @@ public class Author {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "author", fetch = FetchType.LAZY)
     private Set<Book> books;
+
+    @OneToOne(mappedBy = "author", cascade = CascadeType.ALL)
+    PersonalData personalData;
 }
