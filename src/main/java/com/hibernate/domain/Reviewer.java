@@ -1,31 +1,27 @@
 package com.hibernate.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Book {
+public class Reviewer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    int id;
-    private String title;
+    private int id;
+    private String firstname;
+    private String lastname;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Author author;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "book")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reviewer")
     private Set<BookReviewer> bookReviewerSet;
-
 
 }

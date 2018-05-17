@@ -11,7 +11,7 @@ import java.util.Set;
 @Service
 public class BookService {
     @Autowired
-    private BookRepository bookRepository;
+    BookRepository bookRepository;
 
     public Set<Book> getAllBooks(){
         Set<Book> books = new HashSet<Book>();

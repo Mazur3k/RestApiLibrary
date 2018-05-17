@@ -11,25 +11,22 @@ import java.util.Set;
 @Service
 public class AuthorService {
     @Autowired
-    private AuthorRepository authorRepository;
+    AuthorRepository authorRepository;
 
     public Set<Author> getAllAuthors(){
         Set<Author> authors = new HashSet<>();
         authorRepository.findAll().forEach(authors::add);
         return authors;
     }
-
     public Author getAuthor(int id){
         return authorRepository.findOne(id);
     }
-
     public void addAuthor(Author author){
         authorRepository.save(author);
     }
     public void updateAuthor(Author author){
         authorRepository.save(author);
     }
-
     public void deleteAuthor(int id){
         authorRepository.delete(id);
     }

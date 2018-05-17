@@ -25,5 +25,5 @@ public class Author {
     private Set<Book> books;
 
     @OneToOne(mappedBy = "author")
-    PersonalData personalData;
+    private PersonalData personalData;
 }

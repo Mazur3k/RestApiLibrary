@@ -7,25 +7,23 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Set;
 
-@Getter
 @Setter
-@NoArgsConstructor
+@Getter
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
-public class Book {
+public class BookReviewer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    int id;
-    private String title;
+    private int id;
+    private int rate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
-    private Author author;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Book book;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "book")
-    private Set<BookReviewer> bookReviewerSet;
-
-
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Reviewer reviewer;
 }
