@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.Set;
 @Repository
 public interface BookRepository extends CrudRepository<Book, Integer>{
-    public Set<Book> findByAuthorId(int id);
+    Set<Book> findByAuthorId(int id);
 }
