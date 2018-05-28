@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.Set;
 import java.util.UUID;
 
@@ -28,7 +29,7 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/users")
-    public void addUser(@RequestBody User user, HttpServletRequest request){
+    public void addUser(@Valid @RequestBody User user, HttpServletRequest request){
 
         User userExist = userService.getUserByEmailAddress(user.getEmail());
 
@@ -40,7 +41,7 @@ public class UserController {
             user.setConfirmationToken(UUID.randomUUID().toString());
             userService.addUser(user);
 
-            String appUrl = request.getScheme() + "://" + request.getServerName();
+            String appUrl = request.getScheme() + "://" + request.getServerName()+":"+request.getLocalPort();
 
             Mailer.send("restapitest2018@gmail.com","strongpassword",user.getEmail(),"Registration Confirmation","To confirm your e-mail address, please click the link below:\n"
                     + appUrl + "/confirm?token=" + user.getConfirmationToken());
@@ -66,6 +67,6 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/users/{id}")
     public void deleteUser(@PathVariable int id){
-
+        userService.deleteUser(id);
     }
 }

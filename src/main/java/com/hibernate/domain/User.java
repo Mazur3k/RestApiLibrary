@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @NotEmpty
+    @Email
     private String email;
     @NotEmpty
     private String password;
