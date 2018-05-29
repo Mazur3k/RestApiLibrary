@@ -43,7 +43,7 @@ public class UserController {
 
             String appUrl = request.getScheme() + "://" + request.getServerName()+":"+request.getLocalPort();
 
-            Mailer.send("restapitest2018@gmail.com","strongpassword",user.getEmail(),"Registration Confirmation","To confirm your e-mail address, please click the link below:\n"
+            Mailer.send("restapitest2018@gmail.com", System.getenv("password"),user.getEmail(),"Registration Confirmation","To confirm your e-mail address, please click the link below:\n"
                     + appUrl + "/confirm?token=" + user.getConfirmationToken());
         }
     }
